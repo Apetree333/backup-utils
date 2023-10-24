@@ -1,4 +1,4 @@
-# [Security.md]
+# Security.md
 - [Security Policy](#security-policy)
   - [Supported Versions](#supported-versions)
   - [Reporting a Vulnerability](#reporting-a-vulnerability)
