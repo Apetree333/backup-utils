@@ -1,6 +1,5 @@
 name: Backup GHES instance and save to Azure
 run-name: "${{ github.actor }} - Backup GHES instance and save to Azure"
-
 on:
   workflow_call:
     inputs:
@@ -96,17 +95,18 @@ jobs:
       run: |
         current=$(readlink "$HOME/ghe-backup-data/current")
         sudo tar -czvf "${{ inputs.backup-name }}.tar.gz" -C "$HOME/ghe-backup-data/$current" .
-
     - name: Login to Azure
       if: ${{ inputs.backup-name }} != ""
       run: |
         az login \
-          --service-principal \
-          -u "${{ secrets.AZURE_USERNAME }}" \
+         --service-principal
+         \
+          -u
+          "${{ secrets.AZURE_USERNAME }}" \
           -p "${{ secrets.AZURE_PASSWORD }}" \
-          --tenant "${{ secrets.AZURE_TENANT_ID }}"
+          --tenant 
+          "${{ secrets.AZURE_TENANT_ID }}"
         az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-
     - name: Upload backup to Azure
       if: ${{ inputs.backup-name }} != ""
       run: |
